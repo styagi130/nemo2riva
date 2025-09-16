@@ -64,7 +64,7 @@ def export_model(model, cfg, args, artifacts, metadata):
         export_filename = cfg.export_file
         export_file = os.path.join(tmpdir, export_filename)
 
-        if cfg.export_format in ["ONNX", "TS"] and (model.__class__.__name__ == "MagpieTTSModel" and args.submodel == "encoder"):
+        if cfg.export_format in ["ONNX", "TS"] or (model.__class__.__name__ == "MagpieTTSModel" and args.submodel == "encoder"):
             # Export the model, get the descriptions.
             if not isinstance(model, Exportable) and not model.__class__.__name__ == "MagpieTTSModel":
                 logging.error("Your NeMo model class ({}) is not Exportable.".format(metadata['obj_cls']))
